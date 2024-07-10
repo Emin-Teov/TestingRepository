@@ -1,0 +1,6 @@
+RewriteEngine on
+
+
+RewriteRule ^([a-z]+)$ index.php?url=$1
+RewriteRule ^([a-z]+)/([a-z]+)$ index.php?url=$1&page=$2
+RewriteRule ^([a-z]+)/([a-z]+)/([0-9]+)$ index.php?url=$1&page=$2&param=$3
