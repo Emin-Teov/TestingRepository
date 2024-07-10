@@ -146,6 +146,7 @@
                     }
                     self::$modal .= ">$button</button>";
                 }
+                self::$modal .= "</div>";
             }
             self::$modal .= "</div>";
             

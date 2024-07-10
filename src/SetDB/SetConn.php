@@ -7,32 +7,32 @@
          * 
          * @var string
          */
-        // private $host = "sql110.infinityfree.com";
-        private $host = "localhost";
+        private $host = "sql110.infinityfree.com";
+        // private $host = "localhost";
 
         /**
          * Set user name for connection database.
          * 
          * @var string
          */
-        // private $user = "if0_36821573";
-        private $user = "root";
+        private $user = "if0_36821573";
+        // private $user = "root";
         
         /**
          * Set password for connection database.
          * 
          * @var string
          */
-        // private $password = "AoeGBvQ0spP";
-        private $password = "";
+        private $password = "AoeGBvQ0spP";
+        // private $password = "";
 
         /**
          * Set database name for connection database.
          * 
          * @var string
          */
-        // private $db = "if0_36821573_testing";
-        private $db = "testing";
+        private $db = "if0_36821573_testing";
+        // private $db = "testing";
 
         /**
          * Get host name.

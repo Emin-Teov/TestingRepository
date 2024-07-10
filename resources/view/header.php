@@ -13,7 +13,7 @@
             <form action="./userenter" method="post">
                 <input type="hidden" name="_token" value="<?=$_token?>">
                 <label>
-                    <input type="submit" value="<?=$c["login"]?>" class="btn" name="submit">
+                    <input type="submit" value="<?=$c["login"]?>" name="submit">
                 </label>
                 <label>
                     <span class="icon">

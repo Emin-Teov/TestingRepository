@@ -29,12 +29,12 @@
                             </button>
                         </div>
                         <?php endif; ?>
-                        <p><?=$row["value"]?></p>
+                        <p class="search"><?=$row["value"]?></p>
                     </div>
                 </td>
-                <td><p><?=$row["description"]?></p></td>
-                <td><p><?=date("Y-m-d h:i:s", $row["created_at"])?></p></td>
-                <td><p><?php echo $row["updated_at"] ? date("Y-m-d h:i:s", $row["updated_at"]) : $c["no_update"];?></p></td>
+                <td><p class="search"><?=$row["description"]?></p></td>
+                <td><p class="search"><?=date("Y-m-d h:i:s", $row["created_at"])?></p></td>
+                <td><p <?php if($row["updated_at"]): ?> class="search" <?php endif; ?> ><?php echo $row["updated_at"] ? date("Y-m-d h:i:s", $row["updated_at"]) : $c["no_update"];?></p></td>
             </tr>
         <?php endforeach; ?>
         <?php if(Factor::getUser()["permission"]): ?>

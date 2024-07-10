@@ -13,7 +13,7 @@
         const input = searcher.value.toUpperCase();
         searchTable.forEach(tr => {
             let trStyle = "none"; 
-            tr.querySelectorAll("p").forEach(p => {
+            tr.querySelectorAll("p.search").forEach(p => {
                 const trValue = p.innerText || p.textContent;
                 if(trValue.toUpperCase().includes(input)){ trStyle = ""; }
             });
