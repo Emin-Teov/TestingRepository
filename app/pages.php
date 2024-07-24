@@ -4,7 +4,7 @@
 
     Factor::get_client_ip()["status"]=="success" ? date_default_timezone_set(Factor::get_client_ip()["timezone"]) : NULL;
     $c = Factor::getContent();
-    $lang_btn = array_keys(Factor::$content);
+    $lang_btn = array_keys(Factor::setContent()->set);
 
     include './resources/view/head.php';
     include './resources/view/header.php';

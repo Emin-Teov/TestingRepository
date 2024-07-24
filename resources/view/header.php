@@ -35,6 +35,7 @@
                     </span>
                     <input required
                         maxlength="55"
+                        minlength="2"
                         type="text"
                         placeholder="<?=$c["name"]?>"
                         autocomplete="off"
@@ -64,6 +65,7 @@
                     </span>
                     <input required
                         maxlength="55"
+                        minlength="2"
                         type="password"
                         placeholder="<?=$c["password"]?>"
                         autocomplete="off"

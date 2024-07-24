@@ -225,7 +225,7 @@
         /**
          * Generate database query.
          * 
-         * @param boolean boolean boll
+         * @param bool boll
          */
         public function setDB($boll=true){
             if($boll){

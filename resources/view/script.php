@@ -40,6 +40,7 @@
             set_delete_id.setAttribute("type", "hidden");
             set_delete_id.setAttribute("name", "id");
             set_delete_id.setAttribute("value", deleteId);
+            // deleteModal.style.display="none";
         }
 
         /** Set update item */

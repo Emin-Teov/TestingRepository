@@ -1,5 +1,7 @@
 <?php 
     require_once './src/SetDB/DB.php';
+    require_once './src/Content.php';
+    require_once './src/Validation.php';
 
     class Factor
     {
@@ -15,98 +17,6 @@
          * @var string
          */
         private static $defult_language = "en";
-        /**
-         * Get multilingual content for view.
-         * 
-         * @var array<int|string>
-         */
-        public static $content = array(
-            "en"=>array(
-                // buttons
-                "login"=>"Login",
-                "logout"=>"Logout",
-                "add"=>"Add Item",
-                "yes"=>"Yes",
-                "no"=>"No",
-                "search"=>"Search",
-
-                // input values
-                "name"=>"Enter name",
-                "password"=>"Enter password",
-                "value"=>"Set value",
-                "description"=>"Set description",
-
-                //heads
-                "values"=>"Value",
-                "descriptions"=>"Description",
-                "created"=>"Created at",
-                "updated"=>"Updated at",
-
-                //title
-                "delete_data"=>"Are you sure you want to delete that item?",
-                "no_data"=>"Database is empty",
-                "no_user"=>"User is not found",
-                "no_update"=>"The item never updated",
-                "copy"=>"Email address copied",
-            ),
-            "az"=>array(
-                // buttons
-                "login"=>"Daxil ol",
-                "logout"=>"Çıx",
-                "add"=>"Əlavə et",
-                "yes"=>"Hə",
-                "no"=>"Yox",
-                "search"=>"Axtar",
-
-                // input values
-                "name"=>"İstifadəçi adını daxil edin",
-                "password"=>"Parolunuzu daxil edin",
-                "value"=>"Başlığı daxil edin",
-                "description"=>"Izzahı daxil edin",
-
-                //heads
-                "values"=>"Başlıqlar",
-                "descriptions"=>"İzzahlar",
-                "created"=>"Yaradıldıt",
-                "updated"=>"Dəyişdirildi",
-
-                //title
-                "delete_data"=>"Həmin elementi silmək istədiyinizə əminsiniz?",
-                "no_data"=>"Verilənlər bazası boşdur",
-                "no_user"=>"İstifadəçi tapılmadı",
-                "no_update"=>"Element heç vaxt yenilənməyib",
-                "copy"=>"Poçt ünvanı kopyalandı",
-            ),
-            "ru"=>array(
-                // buttons
-                "login"=>"Войти",
-                "logout"=>"Выход",
-                "add"=>"Добавить элемент",
-                "yes"=>"Да",
-                "no"=>"Нет",
-                "search"=>"Поиск",
-
-                // input values
-                "name"=>"Введите имя",
-                "password"=>"Введите пароль",
-                "value"=>"Установить значение",
-                "description"=>"Установить описание",
-
-                //heads
-                "no_data"=>"Database is empty",
-                "values"=>"Значение",
-                "descriptions"=>"Описание",
-                "created"=>"Создано в",
-                "updated"=>"Обновлено в",
-
-                //title
-                "delete_data"=>"Вы уверены, что хотите удалить этот элемент?",
-                "no_data"=>"База данных пуста",
-                "no_user"=>"Пользователь не найден",
-                "no_update"=>"Элемент никогда не обновлялся",
-                "copy"=>"Адрес почты скопирован",
-            ),
-        );
 
         /** 
          * Set dates about users.
@@ -121,10 +31,28 @@
         /** 
          * Get database fields. 
          * 
-         * @return /src/SetDB/DB
+         * @return object
         */
         public static function getDB(){
             return new DB;
+        }
+
+        /** 
+         * Get content fields. 
+         * 
+         * @return object
+        */
+        public static function setContent(){
+            return new Content;
+        }
+
+        /** 
+         * Run validation function. 
+         * 
+         * @return object
+        */
+        public static function getValidator(){
+            return new Validator;
         }
 
         /** 
@@ -162,18 +90,18 @@
          * @param array<string|null> param
         */
         public static function setData($url, $controller, $function, $param=array()){
-            if(isset($_GET["url"]) && $_GET["url"] == $url && isset($_POST["submit"]) && $_POST["_token"] == $_SESSION["token"] ){
+            if(isset($_GET["url"]) && $_GET["url"] == $url && isset($_POST["submit"]) && $_POST["_token"] == $_SESSION["token"] && self::getValidator()->validate()){
                 call_user_func_array( [$controller,  $function], array_filter($_POST, fn ($key) => in_array($key, $param), ARRAY_FILTER_USE_KEY) );
             }
         }
 
         /** 
-         * Run function from controllers. 
+         * Run function from controllers for api. 
          * 
          * @param string url
          * @param string controller
          * @param string function
-         * @return JSON
+         * @return object
         */
         public static function apiData($page, $controller, $function){
             if(isset($_GET["url"]) && $_GET["url"] == "api" && isset($_GET["page"]) && $_GET["page"] == $page){
@@ -193,6 +121,9 @@
 
         /** 
          * Generate session for user interface. 
+         * 
+         * @param string index
+         * @param string session
         */
         public static function setSession($index, $session){
             $_SESSION[$index] = $session;
@@ -213,7 +144,7 @@
          * @return array<string>
         */
         public static function getContent(){
-            return self::$content[self::getLang()];
+            return self::setContent()->set[self::getLang()];
         }
         
         /** 

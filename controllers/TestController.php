@@ -39,6 +39,7 @@
             $db->table('test');
             $db->delete('id = '.$id);
             $db->setDB();
+            header("Location: index.php");
         }
 
         /**
@@ -52,6 +53,7 @@
             $db->table('test');
             $db->insert(array('value', 'description', 'created_at'), array($value, $description, time()));
             $db->setDB();  
+            header("Location: index.php");
         }
 
         /**
@@ -81,5 +83,6 @@
             $db->update(array('value', 'description', 'updated_at'), array($value, $description, time()));
             $db->where('id = '.$id);
             $db->setDB();  
+            header("Location: index.php");
         }
     }

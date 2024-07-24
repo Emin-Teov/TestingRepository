@@ -144,7 +144,7 @@ nav{
     position: absolute;
     top: 51%;
     right: 0;
-    transform: translate(-100%, -50%);
+    transform: translate(-150%, -50%);
     transition: all 0.3s ease;
     color: #c5c5c5;
 }
@@ -154,6 +154,7 @@ nav{
     top: 25%;
     left: 25%;
     width: 50%;
+    z-index: 4;
     background-color: #caca01be;
     border-radius: .5em;
     display: flex;

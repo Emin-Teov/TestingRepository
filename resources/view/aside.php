@@ -11,10 +11,10 @@
         <form action="./addtest" method="post" id="main_form">
             <input type="hidden" name="_token" value="<?php echo $_token; ?>">
             <label class="main_label">
-                <input type="text" required class="form_input" maxlength="55" name="value" placeholder="Value">
+                <input type="text" required class="form_input" minlength="2" maxlength="55" name="value" placeholder="Value">
             </label>
             <label class="main_label">
-                <input type="text" required class="form_input" name="description" maxlength="255" placeholder="Description">
+                <input type="text" required class="form_input" name="description" minlength="2" maxlength="255" placeholder="Description">
             </label>
             <label class="main_label">
                 <input type="submit" class="form_input btn" value="Add Item" name="submit">

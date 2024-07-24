@@ -37,14 +37,13 @@
                 <td><p <?php if($row["updated_at"]): ?> class="search" <?php endif; ?> ><?php echo $row["updated_at"] ? date("Y-m-d h:i:s", $row["updated_at"]) : $c["no_update"];?></p></td>
             </tr>
         <?php endforeach; ?>
-        <?php if(Factor::getUser()["permission"]): ?>
-             <form action="./removetest" method="post" id="remove_form">
-                <input type="hidden" name="_token" value="<?=$_token?>">
-                <input type="hidden" name="submit">
-                <?php Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "type"=>"submit"]]); ?>
-            </form>
-        <?php endif; ?>
         </tbody>
     </table>
+    <?php if(Factor::getUser()["permission"]): ?>
+        <form action="./removetest" method="post" id="remove_form">
+            <input type="hidden" name="_token" value="<?=$_token?>">
+            <?php Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "name"=>"submit", "type"=>"submit"]]); ?>
+        </form>
+    <?php endif; ?>
 <?php  else: Factor::setMessage($c["no_data"]); endif; ?>
 </section>
