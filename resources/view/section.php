@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         <?php foreach ($test_controller->getAll() as $id => $row) : ?>
-            <tr>
+            <tr class="set_test_item" id="set_test_item_by_id-<?=$id?>">
                 <td>
                     <div class="edit-container">
                         <?php if(Factor::getUser()["permission"]): ?>
@@ -39,11 +39,5 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <?php if(Factor::getUser()["permission"]): ?>
-        <form action="./removetest" method="post" id="remove_form">
-            <input type="hidden" name="_token" value="<?=$_token?>">
-            <?php Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "name"=>"submit", "type"=>"submit"]]); ?>
-        </form>
-    <?php endif; ?>
 <?php  else: Factor::setMessage($c["no_data"]); endif; ?>
 </section>

@@ -62,8 +62,8 @@
          * @param array<string|null> buttons
         */
         public static function setMessage($message, $buttons=array()){
-            self::$modal = "<div id='message-modal'>".
-                    "<span onclick='document.querySelector(\"#message-modal\").style.display=\"none\"'>x</span>".
+            self::$modal = "<div id=\"message_modal\">".
+                    "<span onclick=\"document.querySelector('#message_modal').remove()\">x</span>".
                     "<h3>$message</h3>";
             if(!empty($buttons)){
                 self::$modal .= "<div class=\"modal-btn\">";

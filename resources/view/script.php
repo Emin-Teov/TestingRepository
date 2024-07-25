@@ -22,25 +22,31 @@
     });
     
         <?php if(Factor::getUser()["permission"]): ?>
-        const deleteModal = body.querySelector("#message-modal");
-        const deleteForm = body.querySelector("#remove_form");
+        const setTestItems = table.querySelectorAll(".set_test_item");
         var deleteId;
-        deleteModal.style.display="none";
 
         /** Create delete modal */
         function delete_modal(id){
+            setTestItems.disabled = true;
             deleteId = id;
-            deleteModal.style.display="flex";
+            body.innerHTML += `<?=Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "id"=>"close_modal"]])?>`;
         }
 
         /** Delete from database */
         function delete_item(){
-            const set_delete_id = document.createElement("input");
-            deleteForm.appendChild(set_delete_id);
-            set_delete_id.setAttribute("type", "hidden");
-            set_delete_id.setAttribute("name", "id");
-            set_delete_id.setAttribute("value", deleteId);
-            // deleteModal.style.display="none";
+            body.querySelector("#message_modal").remove();
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = ()=>{ 
+                if(setTestItems.length == 1){
+                    body.querySelector("table").remove();
+                    body.innerHTML += `<?=Factor::setMessage($c["no_data"])?>`;
+                }else{
+                    body.querySelector(`tr#set_test_item_by_id-${deleteId}`).remove();
+                }
+            }
+            xhttp.open("POST", "index.php?url=removetest");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send(`_token=<?=$_token?>&id=${deleteId}&submit='removeById`);
         }
 
         /** Set update item */

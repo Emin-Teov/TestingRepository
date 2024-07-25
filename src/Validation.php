@@ -9,6 +9,7 @@
          */
         private $request = [
             "id"=>"requested",
+            "submit"=>"requested",
             "username"=>"requested|min:2|max:55",
             "password"=>"requested|min:2|max:55",
             "value"=>"requested|min:2|max:55",
