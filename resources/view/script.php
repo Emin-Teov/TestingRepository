@@ -24,7 +24,7 @@
         <?php if(Factor::getUser()["permission"]): ?>
         const setTestItems = table.querySelectorAll(".set_test_item");
         var deleteId;
-        <?php $tableDeleteId = uniqid(); ?>
+        <?php $tableDeleteId = rand(); ?>
 
         /** Create delete modal */
         function delete_modal(id){

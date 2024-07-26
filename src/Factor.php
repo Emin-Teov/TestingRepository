@@ -63,7 +63,7 @@
          * @param int id
         */
         public static function setMessage($message, $buttons=array(), $id=0){
-            $modal_id = !$id ? uniqid() : $id;
+            $modal_id = !$id ? rand() : $id;
             self::$modal = "<div id=\"message_modal-$modal_id\" class=\"message_modal\">".
                     "<span onclick=\"document.querySelector('#message_modal-$modal_id').remove()\">x</span>".
                     "<h3>$message</h3>";
