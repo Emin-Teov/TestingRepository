@@ -29,19 +29,19 @@
                     foreach (explode("|", $validate_param) as $param) {
                         $param_value = explode(":", $param);
                         if ($param == "requested" && $_POST[$validate_key] == ""|NULL){ 
-                            echo Factor::setMessage(Factor::getContent()["request"]);
+                            Factor::setMessage(Factor::getContent()["request"]);
                             $result = false;
                             break;
                         }elseif($param == "email" && !filter_var($_POST[$validate_key], FILTER_VALIDATE_EMAIL)){
-                            echo Factor::setMessage(Factor::getContent()["email"]);
+                            Factor::setMessage(Factor::getContent()["email"]);
                             $result = false;
                             break;
                         }elseif($param_value[0] == "min" && strlen($_POST[$validate_key]) < intval($param_value[1])){
-                            echo Factor::setMessage(sprintf(Factor::getContent()["min"], $validate_key, $param_value[1]));
+                            Factor::setMessage(sprintf(Factor::getContent()["min"], $validate_key, $param_value[1]));
                             $result = false;
                             break;
                         }elseif($param_value[0] == "max" && strlen($_POST[$validate_key]) > intval($param_value[1])){
-                            echo Factor::setMessage(sprintf(Factor::getContent()["max"], $validate_key, $param_value[1]));
+                            Factor::setMessage(sprintf(Factor::getContent()["max"], $validate_key, $param_value[1]));
                             $result = false;
                             break;
                         }else{
