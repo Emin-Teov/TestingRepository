@@ -60,10 +60,12 @@
          * 
          * @param string message
          * @param array<string|null> buttons
+         * @param int id
         */
-        public static function setMessage($message, $buttons=array()){
-            self::$modal = "<div id=\"message_modal\">".
-                    "<span onclick=\"document.querySelector('#message_modal').remove()\">x</span>".
+        public static function setMessage($message, $buttons=array(), $id=0){
+            $modal_id = !$id ? uniqid() : $id;
+            self::$modal = "<div id=\"message_modal-$modal_id\" class=\"message_modal\">".
+                    "<span onclick=\"document.querySelector('#message_modal-$modal_id').remove()\">x</span>".
                     "<h3>$message</h3>";
             if(!empty($buttons)){
                 self::$modal .= "<div class=\"modal-btn\">";

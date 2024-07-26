@@ -24,17 +24,18 @@
         <?php if(Factor::getUser()["permission"]): ?>
         const setTestItems = table.querySelectorAll(".set_test_item");
         var deleteId;
+        <?php $tableDeleteId = uniqid(); ?>
 
         /** Create delete modal */
         function delete_modal(id){
             setTestItems.disabled = true;
             deleteId = id;
-            body.innerHTML += `<?=Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "id"=>"close_modal"]])?>`;
+            body.innerHTML += `<?=Factor::setMessage($c["delete_data"], [$c["yes"]=>["onmousedown"=>"delete_item()", "id"=>"close_modal"]], $tableDeleteId)?>`;
         }
 
         /** Delete from database */
         function delete_item(){
-            body.querySelector("#message_modal").remove();
+            body.querySelector("#message_modal-<?=$tableDeleteId?>").remove();
             const xhttp = new XMLHttpRequest();
             xhttp.onload = ()=>{ 
                 if(setTestItems.length == 1){
