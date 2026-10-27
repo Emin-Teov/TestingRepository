@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Framework\Console\Kernel;
+
+$app = require __DIR__ . '/bootstrap/app.php';
+
+exit($app->make(Kernel::class)->handle($argv));

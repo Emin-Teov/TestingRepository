@@ -1,2 +1,10 @@
+/vendor/
 /.vscode/
-/src/SetDB/SetConn.php
+/.idea/
+.env
+.phpunit.result.cache
+/.phpunit.cache/
+/storage/logs/*
+/storage/cache/*
+/storage/database/*
+!/storage/*/.gitkeep

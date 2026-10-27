@@ -1,6 +1,10 @@
-RewriteEngine on
+# Send every request to the public/ directory so that application code,
+# configuration and the .env file are never reachable from the web.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
 
-
-RewriteRule ^([a-z]+)$ index.php?url=$1
-RewriteRule ^([a-z]+)/([a-z]+)$ index.php?url=$1&page=$2
-RewriteRule ^([a-z]+)/([a-z]+)/([0-9]+)$ index.php?url=$1&page=$2&param=$3
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
