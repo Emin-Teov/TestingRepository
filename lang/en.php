@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'Warehouse management: record incoming goods with their unit, quantity, price and total value, and view stock reports.',
+    ],
+
     'common' => [
         'yes' => 'Yes',
         'no' => 'No',

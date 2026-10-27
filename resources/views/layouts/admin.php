@@ -23,18 +23,14 @@ $links = array_filter([
 <!DOCTYPE html>
 <html lang="<?= e(app(\Framework\Translation\Translator::class)->getLocale()) ?>">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
-    <title><?= e($title . ' · ' . config('app.name')) ?></title>
-    <link rel="icon" href="<?= e(asset('assets/img/logo.png')) ?>" type="image/png">
+<?= $this->insert('partials/meta', ['title' => config('app.name'), 'private' => true]) ?>
     <link rel="stylesheet" href="<?= e(asset('assets/css/app.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('assets/css/admin.css')) ?>">
 </head>
 <body class="admin">
     <aside class="sidebar" id="sidebar">
         <a class="brand" href="<?= e(route('admin.dashboard')) ?>">
-            <img src="<?= e(asset('assets/img/logo.png')) ?>" alt="" width="28" height="28">
+            <img src="<?= e(asset('assets/img/logo.svg')) ?>" alt="" width="34" height="34">
             <span><?= e(config('app.name')) ?></span>
         </a>
 

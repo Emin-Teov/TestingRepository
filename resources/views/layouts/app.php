@@ -6,18 +6,14 @@ $user = auth()->user();
 <!DOCTYPE html>
 <html lang="<?= e(app(\Framework\Translation\Translator::class)->getLocale()) ?>">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
-    <title><?= e(isset($title) ? $title . ' · ' . config('app.name') : config('app.name')) ?></title>
-    <link rel="icon" href="<?= e(asset('assets/img/logo.png')) ?>" type="image/png">
+<?= $this->insert('partials/meta', ['title' => config('app.name')]) ?>
     <link rel="stylesheet" href="<?= e(asset('assets/css/app.css')) ?>">
 </head>
 <body class="site">
     <header class="site-header">
         <div class="container site-header__inner">
             <a class="brand" href="<?= e(route('home')) ?>">
-                <img src="<?= e(asset('assets/img/logo.png')) ?>" alt="" width="32" height="32">
+                <img src="<?= e(asset('assets/img/logo.svg')) ?>" alt="" width="36" height="36">
                 <span><?= e(config('app.name')) ?></span>
             </a>
 

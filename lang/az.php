@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'meta' => [
+        'description' => 'Anbar idarəetməsi: daxil olan malları ölçü vahidi, miqdarı, qiyməti və ümumi dəyəri ilə qeydə alın, anbar hesabatlarına baxın.',
+    ],
+
     'common' => [
         'yes' => 'Hə',
         'no' => 'Yox',

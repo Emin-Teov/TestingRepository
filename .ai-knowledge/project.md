@@ -56,6 +56,17 @@ Seeded types: **Administrator** (locked, everything), **Warehouse manager** (ent
 `admin / admin12345`, `manager / manager123`, `storekeeper / storekeeper123`, `accountant / accountant123`.
 These are development defaults only.
 
+## Live deployment (InfinityFree)
+
+- Domain `ecwarehouse.ct.ws` (also `dnp7vlic.infinityfree.com`), document root `/htdocs`; the root `.htaccess` sends
+  everything to `public/`. MySQL host `sql304.infinityfree.com`; remote MySQL is blocked, so import data through
+  phpMyAdmin or a one-time script on the server. The hosting dump must not contain `CREATE DATABASE` / `USE`.
+- FTP only (no SFTP): `ftpupload.net:21` with explicit TLS, **TLS 1.2 max** (TLS 1.3 breaks uploads over ~15 KB).
+  The VS Code SFTP extension (natizyskunk.sftp) is configured in `.vscode/sftp.json` (git-ignored, holds the password).
+- Never upload the local `vendor/` (it has dev packages; the autoloader would require missing PHPUnit files) or the
+  local `.env`. Build vendor with `composer install --no-dev --optimize-autoloader` in a clean copy and upload that.
+- The server's `.env` is different from the local one (`APP_ENV=production`, `APP_DEBUG=false`, hosting DB details).
+
 ## The SQL dump (`Session.sql`)
 
 It is generated from the real database, not written by hand. After any schema or seed change:
@@ -64,6 +75,17 @@ It is generated from the real database, not written by hand. After any schema or
 php console migrate:fresh --seed     # rebuilds the local `warehouse` database (destroys its data!)
 ```
 
-Then dump it with `C:\xampp\mysql\bin\mysqldump.exe -uroot --databases warehouse --skip-dump-date --skip-comments --add-drop-table`,
-keep the explanatory header comment at the top of `Session.sql`, and check that it imports into a scratch database.
+Then dump it **with the tables listed in dependency order** (mysqldump's default is alphabetical, which puts `products`
+before `units` and fails with errno 150 whenever someone runs part of the file without the `FOREIGN_KEY_CHECKS=0` header):
+
+```bash
+C:\xampp\mysql\bin\mysqldump.exe -uroot warehouse usertypes users units categories suppliers products stock_entries migrations --skip-dump-date --skip-comments --add-drop-table
+```
+
+Listing tables means no `--databases`, so the `CREATE DATABASE IF NOT EXISTS` / `USE` lines are written by hand after the
+explanatory header comment. Also replace mysqldump's `/*!40101 SET @OLD_…*/` header and its `SET …=@OLD_…` footer with
+plain `SET NAMES utf8mb4; SET FOREIGN_KEY_CHECKS = 0;` at the top and `SET FOREIGN_KEY_CHECKS = 1;` at the end: users
+paste parts of the file into phpMyAdmin, and the footer fails (#1231 time_zone NULL) when the header was not run.
+Add new tables to that list after the tables they reference. Check that the file imports
+into a scratch database.
 Ask the user before running `migrate:fresh` on a database that may contain real data.
